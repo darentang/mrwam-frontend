@@ -59,16 +59,22 @@ function Connect(props) {
                 <h4 style={{marginTop: '2vh'}}>Local</h4>
                 <Form onSubmit={handleSubmit(checkConnect)}>
                     <Form.Group>
-                        <Form.Label>Local Server Address</Form.Label>
+                        <Form.Label>Local Satellite Address</Form.Label>
                         <InputGroup>
                             <Form.Control name="address" ref={register()} ></Form.Control>
                         </InputGroup>
                     </Form.Group>
                     <Button type="submit">Connect</Button>
                 </Form>
-                <h4 style={{marginTop: '2vh'}}>Global</h4>
-                <Button onClick={() => checkConnect({address:'http://127.0.0.1:5000'})}>
-                    Connect to Global Server
+                <h3>
+                    <center>or</center>
+                </h3>
+                <h4 style={{marginTop: '2vh'}}>Demo Satellite</h4>
+                <p>
+                You can connect to a demo satellite via the internet.
+                </p>
+                <Button onClick={() => checkConnect({address:'https://mrwam-backend.herokuapp.com/'})}>
+                    Connect to Demo Satellite
                 </Button>
             </Jumbotron>
             <Modal show={modalState.show} onHide={handleHide} closeButton>
