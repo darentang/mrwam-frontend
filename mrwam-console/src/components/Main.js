@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal'
 import Health from './Health.js'
 import Schedule from './Schedule.js'
 import Download from './Download.js'
+import Test from './Test.js'
 import moment from 'moment-timezone';
 import {useForm} from 'react-hook-form';
 
@@ -53,6 +54,9 @@ function Main() {
                 </Tab>
                 <Tab eventKey="download" title="Download" className="tabContent">
                     <Download download={download}/>
+                </Tab>
+                <Tab eventKey="test" title="Test" className="tabContent">
+                    <Test />
                 </Tab>
             </Tabs>
             <Modal>
