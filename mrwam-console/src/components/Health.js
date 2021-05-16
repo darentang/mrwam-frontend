@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import Table from 'react-bootstrap/Table';
 import moment from 'moment-timezone';
+import socketIOClient from 'socket.io-client';
+
 
 function Health(props) {
-    var health = props.health;
+    const [health, setHealth] = useState(null);
+
+    useEffect(() => {
+        const socket = socketIOClient(sessionStorage.getItem('api-host'));
+        socket.on("wod", data=> {
+            console.log(data);
+            setHealth(data);
+            // console.log(data);
+        })
+    }, []);
     return(<div>
                 <h2>Whole Orbit Data</h2>
                 {(health != null) &&
@@ -26,31 +37,31 @@ function Health(props) {
                             </tr>
                             <tr>
                                 <td>Battery Voltage (V)</td>
-                                <td>{health.v_batt}</td>
+                                <td>{Math.round(health.v_batt*100)/100}</td>
                             </tr>
                             <tr>
                                 <td>Battery Current (mA)</td>
-                                <td>{health.i_batt}</td>
+                                <td>{Math.round(health.i_batt*100)/100}</td>
                             </tr>
                             <tr>
                                 <td>3.3V Bus Current (mA)</td>
-                                <td>{health.v_33}</td>
+                                <td>{Math.round(health.v_33*100)/100}</td>
                             </tr>
                             <tr>
                                 <td>5V Bus Current (mA)</td>
-                                <td>{health.v_5}</td>
+                                <td>{Math.round(health.v_5*100)/100}</td>
                             </tr>
                             <tr>
                                 <td>Communications Subsystem Temp (deg C)</td>
-                                <td>{health.t_comm}</td>
+                                <td>{Math.round(health.t_comm*100)/100}</td>
                             </tr>
                             <tr>
                                 <td>EPS Temp (deg C)</td>
-                                <td>{health.t_eps}</td>
+                                <td>{Math.round(health.t_eps*100)/100}</td>
                             </tr>
                             <tr>
                                 <td>Battery Temp (deg C)</td>
-                                <td>{health.t_batt}</td>
+                                <td>{Math.round(health.t_batt*100)/100}</td>
                             </tr>
                             </tbody>
                     </Table>
