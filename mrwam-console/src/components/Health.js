@@ -10,7 +10,7 @@ function Health(props) {
     useEffect(() => {
         const socket = socketIOClient(sessionStorage.getItem('api-host'));
         socket.on("wod", data=> {
-            console.log(data);
+            // console.log(data);
             setHealth(data);
             // console.log(data);
         })

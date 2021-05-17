@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 function Box(props) {
     // This reference will give us direct access to the THREE.Mesh object
-    // const mesh = useRef();
+    const mesh = useRef();
     const fbx = useLoader(GLTFLoader, './sat.gltf')
 
     // Return the view, these are regular Threejs elements expressed in JSX
@@ -23,7 +23,9 @@ function Box(props) {
     //     <boxGeometry args={[1, 1, 3]} />
     //     <meshStandardMaterial color={'hotpink'} />
     //   </mesh>
-        <primitive object={fbx.scene} scale={0.5}/>
+        <mesh ref={mesh} {...props}>
+            <primitive object={fbx.scene} scale={0.5}/>
+        </mesh>
     )
   }
 
@@ -40,7 +42,6 @@ function Test () {
         const socket = socketIOClient(sessionStorage.getItem('api-host'));
         socket.on("eul", data=> {
             setEul(data);
-            // console.log(data);
         })
     }, []);
     const camera = useRef();
@@ -130,7 +131,7 @@ function Test () {
                             <PerspectiveCamera makeDefault up={[0, 0, -1]} ref={camera} position={[0, 8, 0]}/>
                             <OrbitControls camera={camera.current} enableZoom={false} ref={controlsRef} rotateSpeed={1}/>
                             <Environment preset="sunset" />
-                            <Box/>
+                            <Box rotation={[eul.x, eul.y, eul.z]}/>
                             <GizmoHelper
                                 alignment={"bottom-right"}
                                 margin={[80, 80]}
