@@ -119,6 +119,15 @@ function Test () {
                         </Row>
                     </Card.Body>
                 </Card>
+                <Card style={{margin:"1vw"}}>
+                    <Card.Header>Camera Test</Card.Header>
+                    <Card.Body>
+                        <Button onClick={() => {
+                            fetch(sessionStorage.getItem('api-host')+'take_image_now')
+                        }
+                        }>Take Image Now</Button>
+                    </Card.Body>
+                </Card>
                 </Col>                    
                 <Col>
             

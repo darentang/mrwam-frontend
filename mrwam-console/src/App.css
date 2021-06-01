@@ -1,15 +1,15 @@
 .main {
     margin-top: 2vw;
     margin-bottom: 2vw;
-    margin-right: 2vw;
-    margin-left: 2vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
 }
 
 .tabContent{
     margin-top: 2vw;
     margin-bottom: 2vw;
-    margin-right: 2vw;
-    margin-left: 2vw;
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .testpanel {
