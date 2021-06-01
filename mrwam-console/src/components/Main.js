@@ -2,12 +2,16 @@ import React, { useEffect, useState, useContext } from "react";
 import Container from 'react-bootstrap/Container';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal'
 import Health from './Health.js'
 import Schedule from './Schedule.js'
 import Download from './Download.js'
 import Test from './Test.js'
 import moment from 'moment-timezone';
+import Card from 'react-bootstrap/Card';
 import {useForm} from 'react-hook-form';
 
 
@@ -57,6 +61,21 @@ function Main() {
                 </Tab>
                 <Tab eventKey="test" title="Test" className="tabContent">
                     <Test />
+                </Tab>
+                <Tab eventKey="stream" title="Stream" className="tabContent">
+                    <Row>
+                        <Col>
+                            <Card>
+                                <Card.Header>Video Stream</Card.Header>
+                                <Card.Body>
+                                    <img src={sessionStorage.getItem('api-host')+'video_feed'}/>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button>Take Image Now</Button>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                    </Row>
                 </Tab>
             </Tabs>
             <Modal>
