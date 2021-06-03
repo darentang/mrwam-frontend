@@ -100,20 +100,56 @@ function Test () {
                         <Row>
                         <Col>
                         <ButtonGroup className="mr-2">
-                            <Button>+X</Button>
-                            <Button>-X</Button>
+                            <Button 
+                            onClick={()=>{
+                                fetch(sessionStorage.getItem('api-host')+
+                                'test_motor?axis=X&direction=pos'
+                                );
+                            }}
+                            >+X</Button>
+                            <Button 
+                            onClick={()=>{
+                                fetch(sessionStorage.getItem('api-host')+
+                                'test_motor?axis=X&direction=neg'
+                                );
+                            }}
+                            >-X</Button>
                         </ButtonGroup>
                         </Col>
                         <Col>
                         <ButtonGroup className="mr-2">
-                            <Button>+Y</Button>
-                            <Button>-Y</Button>
+                            <Button 
+                            onClick={()=>{
+                                fetch(sessionStorage.getItem('api-host')+
+                                'test_motor?axis=Y&direction=pos'
+                                );
+                            }}
+                            >+Y</Button>
+                            <Button 
+                            onClick={()=>{
+                                fetch(sessionStorage.getItem('api-host')+
+                                'test_motor?axis=Y&direction=neg'
+                                );
+                            }}
+                            >-Y</Button>
                         </ButtonGroup>
                         </Col>
                         <Col>
                         <ButtonGroup className="mr-2">
-                            <Button>+Z</Button>
-                            <Button>-Z</Button>
+                            <Button 
+                            onClick={()=>{
+                                fetch(sessionStorage.getItem('api-host')+
+                                'test_motor?axis=Z&direction=pos'
+                                );
+                            }}
+                            >+Z</Button>
+                            <Button 
+                            onClick={()=>{
+                                fetch(sessionStorage.getItem('api-host')+
+                                'test_motor?axis=Z&direction=neg'
+                                );
+                            }}
+                            >-Z</Button>
                         </ButtonGroup>
                         </Col>
                         </Row>
