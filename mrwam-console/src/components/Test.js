@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 
 function Box(props) {
     // This reference will give us direct access to the THREE.Mesh object
@@ -54,18 +55,85 @@ function Test () {
                 <Card style={{margin:"1vw"}}>
                     <Card.Header>Euler Angles</Card.Header>
                     <Card.Body>
-                        <Row>
-                        <Col>
-                        x: {Math.round(eul.x * 180 / Math.PI, 2)} 
-                        </Col>
-                        <Col>
-                        y: {Math.round(eul.y * 180 / Math.PI, 2)} 
-                        </Col>
-                        <Col>
-                        z: {Math.round(eul.z * 180 / Math.PI, 2)} 
-                        </Col>
-                        </Row>
+                        <Container>
+                            <Row style={{"margin-top":"1vw"}}>
+                            <Col>
+                            x: {Math.round(eul.x * 180 / Math.PI, 2)} 
+                            </Col>
+                            <Col>
+                            y: {Math.round(eul.y * 180 / Math.PI, 2)} 
+                            </Col>
+                            <Col>
+                            z: {Math.round(eul.z * 180 / Math.PI, 2)} 
+                            </Col>
+                            </Row>
+                            <Row style={{"margin-top":"1vw"}}>
+                                <Col>
+                                <ButtonGroup className="mr-2">
+                                <Button 
+                                onClick={()=>{
+                                    fetch(sessionStorage.getItem('api-host')+
+                                    'point?mode=q&axis=X'
+                                    );
+                                }}
+                                >+X</Button>
+                                <Button 
+                                onClick={()=>{
+                                    fetch(sessionStorage.getItem('api-host')+
+                                    'point?mode=q&axis=x'
+                                    );
+                                }}
+                                >-X</Button>
+                                </ButtonGroup>
+                                </Col>
+                                <Col>
+                                <ButtonGroup className="mr-2">
+                                <Button 
+                                onClick={()=>{
+                                    fetch(sessionStorage.getItem('api-host')+
+                                    'point?mode=q&axis=Y'
+                                    );
+                                }}
+                                >+Y</Button>
+                                <Button 
+                                onClick={()=>{
+                                    fetch(sessionStorage.getItem('api-host')+
+                                    'point?mode=q&axis=y'
+                                    );
+                                }}
+                                >-Y</Button>
+                                </ButtonGroup>
+                                </Col>
+                                <Col>
+                                <ButtonGroup className="mr-2">
+                                <Button 
+                                onClick={()=>{
+                                    fetch(sessionStorage.getItem('api-host')+
+                                    'point?mode=q&axis=Z'
+                                    );
+                                }}
+                                >+Z</Button>
+                                <Button 
+                                onClick={()=>{
+                                    fetch(sessionStorage.getItem('api-host')+
+                                    'point?mode=q&axis=z'
+                                    );
+                                }}
+                                >-Z</Button>
+                                </ButtonGroup>
+                                </Col>
+                            </Row>
+                        </Container>
                     </Card.Body>
+                    <Card.Footer>
+                        <Button 
+                            onClick={()=>{
+                                fetch(sessionStorage.getItem('api-host')+
+                                'point?mode=Q'
+                                );
+                            }}
+                        >Stabilise</Button>
+                    </Card.Footer>
                 </Card>
                 
                 
