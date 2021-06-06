@@ -7,7 +7,9 @@ import Connect from './components/Connect'
 import Main from './components/Main'
 
 import Navbar from 'react-bootstrap/Navbar'
+
 import Button from 'react-bootstrap/Button'
+import moment from 'moment-timezone'
 
 function App() {
   const [address, setAddress] = useState(null);
@@ -15,6 +17,7 @@ function App() {
     <div>
     <Navbar bg="primary" variant="dark" sticky="top">
       <Navbar.Brand>MrWAM Mission Console</Navbar.Brand>
+      
       <Navbar.Collapse className="justify-content-end">
           {(sessionStorage.getItem('api-host') == null) &&
             <Navbar.Text>
@@ -24,7 +27,7 @@ function App() {
           {(sessionStorage.getItem('api-host') != null) &&
             <div>
               <Navbar.Text style={{'marginRight': '2vh'}}>
-                Connected to {sessionStorage.getItem('api-host')}
+                {sessionStorage.getItem('api-host')} ({moment.tz.guess()})
               </Navbar.Text>
             </div>
           }

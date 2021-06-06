@@ -48,7 +48,7 @@ function Main() {
 
     return(
         <Container>
-            <h5>Your Time Zone: {moment.tz.guess()}</h5>
+            
             <Tabs activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="health" title="Health" className="tabContent" default>
                     <Health health={health} setKey={setKey}/>

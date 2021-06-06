@@ -30,6 +30,10 @@ function Box(props) {
     )
   }
 
+Number.prototype.clamp = function(min, max) {
+return Math.min(Math.max(this, min), max);
+};
+
 function Loader() {
     const { progress } = useProgress()
     return <Html center>{progress} % loaded</Html>
@@ -37,12 +41,20 @@ function Loader() {
 
 function Test () {
     const [eul, setEul] = useState({x: 0, y:0, z:0});
+    const [quat, setQuat] = useState({q1: 0, q2: 0, q3: 0, q4: 0})
+    const [T, setT] = useState({x: 0, y:0, z:0});
     const controlsRef = React.useRef();
 
     useEffect(() => {
         const socket = socketIOClient(sessionStorage.getItem('api-host'));
         socket.on("eul", data=> {
             setEul(data);
+        });
+        socket.on("T", data=> {
+            setT(data);
+        });
+        socket.on("q", data=> {
+            setQuat(data);
         })
     }, []);
     const camera = useRef();
@@ -65,6 +77,17 @@ function Test () {
                             </Col>
                             <Col>
                             z: {Math.round(eul.z * 180 / Math.PI, 2)} 
+                            </Col>
+                            </Row>
+                            <Row>
+                            <Col>
+                            Vx: {Math.round(T.x.clamp(-255, 255))} 
+                            </Col>
+                            <Col>
+                            Vy: {Math.round(T.x.clamp(-255, 255))} 
+                            </Col>
+                            <Col>
+                            Vz: {Math.round(T.x.clamp(-255, 255))} 
                             </Col>
                             </Row>
                             <Row style={{"margin-top":"1vw"}}>
@@ -126,13 +149,28 @@ function Test () {
                         </Container>
                     </Card.Body>
                     <Card.Footer>
-                        <Button 
-                            onClick={()=>{
-                                fetch(sessionStorage.getItem('api-host')+
-                                'point?mode=Q'
-                                );
-                            }}
-                        >Stabilise</Button>
+                        <Row>
+                            <Col>
+                                <Button 
+                                    onClick={()=>{
+                                        fetch(sessionStorage.getItem('api-host')+
+                                        'point?mode=Q'
+                                        );
+                                    }}
+                                >Stabilise</Button>
+                            </Col>
+                            <Col>
+                                <Button variant="danger"
+                                    onClick={()=>{
+                                        fetch(sessionStorage.getItem('api-host')+
+                                        'point?mode=r'
+                                        );
+                                    }}
+                                >
+                                    Kill
+                                </Button>
+                            </Col>
+                        </Row>
                     </Card.Footer>
                 </Card>
                 
@@ -243,8 +281,9 @@ function Test () {
                         <Suspense fallback={<Loader/>}>
                             <PerspectiveCamera makeDefault up={[0, 0, -1]} ref={camera} position={[0, 8, 0]}/>
                             <OrbitControls camera={camera.current} enableZoom={false} ref={controlsRef} rotateSpeed={1}/>
-                            <Environment preset="sunset" />
-                            <Box rotation={[eul.x, eul.y, eul.z]}/>
+                            <Environment preset={"sunset"}/>
+                            <Box quaternion={[quat.q1, -quat.q2, -quat.q3, -quat.q4]}/>
+                            {/* <Box rotation={[0, Math.PI/2, 0]}/> */}
                             <GizmoHelper
                                 alignment={"bottom-right"}
                                 margin={[80, 80]}
