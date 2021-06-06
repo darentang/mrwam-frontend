@@ -9,6 +9,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import { AxesHelper } from "three";
 
 function Box(props) {
     // This reference will give us direct access to the THREE.Mesh object
@@ -281,7 +282,8 @@ function Test () {
                         <Suspense fallback={<Loader/>}>
                             <PerspectiveCamera makeDefault up={[0, 0, -1]} ref={camera} position={[0, 8, 0]}/>
                             <OrbitControls camera={camera.current} enableZoom={false} ref={controlsRef} rotateSpeed={1}/>
-                            <Environment preset={"sunset"}/>
+                            <Environment preset={null} files={"round_platform_1k.hdr"}/>
+                            {/* <ambientLight intensity={1} /> */}
                             <Box quaternion={[quat.q1, -quat.q2, -quat.q3, -quat.q4]}/>
                             {/* <Box rotation={[0, Math.PI/2, 0]}/> */}
                             <GizmoHelper
